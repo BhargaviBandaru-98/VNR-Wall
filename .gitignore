@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# dotenv environment variables
+
+# OS files
+.DS_Store
+
+# VS Code settings
+.vscode/
