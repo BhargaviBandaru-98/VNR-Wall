@@ -1,49 +1,42 @@
 .sub-navbar {
-    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
-    color: #6b21a8;
-    font-weight: 600;
-    padding: 1rem 1.5rem;
-    border-left: 12px solid #7c3aed;
-    border-radius: 15px;
-    margin-bottom: 1.5rem;
-    box-shadow: 
-      0 4px 15px rgba(124, 58, 237, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    font-family: 'Segoe UI', cursive;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-  }
+  background: linear-gradient(135deg, #e0f2ff, #bfdbfe);
+  color: #0f172a;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-left: 6px solid #3b82f6;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
 
-  .sub-navbar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
-    transition: left 0.8s ease;
-  }
+.sub-navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s;
+}
 
-  .sub-navbar:hover {
-    background: linear-gradient(135deg, #e9d5ff, #ddd6fe);
-    color: #581c87;
-    transform: translateX(5px);
-    border-left-color: #a855f7;
-    box-shadow: 
-      0 6px 20px rgba(124, 58, 237, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  }
+.sub-navbar:hover {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-left-color: #8b5cf6;
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.2);
+}
 
-  .sub-navbar:hover::before {
-    left: 100%;
-  }
+.sub-navbar:hover::before {
+  left: 100%;
+}
 
-  @media (max-width: 768px) {
-    .sub-navbar {
-      font-size: 0.9rem;
-      padding: 0.8rem 1rem;
-    }
+@media (max-width: 768px) {
+  .sub-navbar {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.8rem;
   }
+}

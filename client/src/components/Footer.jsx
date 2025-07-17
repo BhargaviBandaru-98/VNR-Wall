@@ -1,11 +1,18 @@
 import React from "react";
-import "../styles/Footer.css";
+import '../styles/Footer.css';
 
 function Footer() {
   return (
     <div className="footer-container">
       <h2 className="footer-heading">
-        <span className="footer-icon">✉</span> How to Use This Site
+        <div className="footer-logo-container">
+          <div className="footer-logo-icon">
+            <svg className="footer-shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+        </div>
+        How to Use This Site
       </h2>
       <ul className="footer-list">
         <li className="footer-list-item">

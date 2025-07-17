@@ -6,11 +6,13 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #faf5ff, #f3e8ff, #e9d5ff);
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #f3e8ff 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   color: #333;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 @keyframes gradientShift {
@@ -20,7 +22,7 @@ body {
 }
 
 .app {
- padding: 50px;
+ padding: 0 50px 50px 50px;
  position: relative;
 }
 
@@ -39,6 +41,6 @@ body {
 
 @media (max-width: 768px) {
   .app {
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
   }
 }
