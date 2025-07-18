@@ -10,10 +10,16 @@ const HomePage = () => {
     fname = user.family_name}
 
   return (
-    <>
+    <div className="homepage-container">
       <header className="hero">
         <div className="hero-content">
-        <h1 id="welcomeMessage">Welcome, {fname}</h1>
+          <h1 id="welcomeMessage">
+            <svg className="welcome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Welcome, {fname}
+          </h1>
           <p>
             VNR WALL helps you to find Genuine opportunities. Check every opportunity you receive here – whether it's a Genuine or Fake call to you. Stop trapping into Fake Internship, Placement Training & Job Scams!
           </p>
@@ -38,7 +44,7 @@ const HomePage = () => {
       </section>
 
       <Footer/>
-    </>
+    </div>
   );
 };
 

@@ -1,12 +1,14 @@
 .hero {
   background: linear-gradient(135deg, rgba(243, 232, 255, 0.6), rgba(233, 213, 255, 0.8));
-  padding: 2rem;
+  padding: 3rem 2rem;
   text-align: center;
-  border-radius: 15px;
-  margin-bottom: 2rem;
+  border-radius: 0;
+  margin: 0;
   box-shadow: 0 4px 16px rgba(168, 85, 247, 0.1);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hero::before {
@@ -28,6 +30,8 @@
 .hero-content {
   position: relative;
   z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .hero-content h1 {
@@ -37,19 +41,22 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 1rem;
-  font-family: 'Segoe UI', cursive;
+  margin-bottom: 1.5rem;
+  font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  line-height: 1.2;
 }
 
 .welcome-icon {
-  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   color: #3b82f6;
   filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
   animation: wave 2s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 @keyframes wave {
@@ -61,36 +68,127 @@
 .hero-content p {
   font-size: 1.1rem;
   color: #1e40af;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
   font-weight: 500;
+  padding: 0 1rem;
 }
 
 .card-section {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-top: 3rem;
+  margin: 3rem auto;
   flex-wrap: wrap;
-  padding-bottom: 20px;
+  padding: 0 2rem 2rem 2rem;
+  max-width: 1200px;
+  box-sizing: border-box;
 }
 
+/* Large Desktop */
+@media (min-width: 1200px) {
+  .hero {
+    padding: 4rem 3rem;
+  }
+  
+  .card-section {
+    gap: 3rem;
+    padding: 0 3rem 3rem 3rem;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .card-section {
+    gap: 1.5rem;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+/* Tablet */
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 2rem;
+    gap: 10px;
+    flex-direction: column;
   }
   
   .hero-content p {
     font-size: 1rem;
+    padding: 0 0.5rem;
   }
   
   .hero {
-    padding: 2rem 1rem 1.5rem 1rem;
+    padding: 2rem 1rem;
   }
   
   .card-section {
     flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
+    margin: 2rem auto;
+    padding: 0 1rem 1rem 1rem;
+  }
+  
+  .welcome-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .hero-content h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 0.95rem;
+    padding: 0;
+  }
+  
+  .hero {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .card-section {
+    margin: 1.5rem auto;
+    padding: 0 0.75rem 0.75rem 0.75rem;
+    gap: 1rem;
+  }
+  
+  .welcome-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .hero {
+    padding: 1.25rem 0.5rem;
+  }
+  
+  .card-section {
+    padding: 0 0.5rem 0.5rem 0.5rem;
   }
 }
