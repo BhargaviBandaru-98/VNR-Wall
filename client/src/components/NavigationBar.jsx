@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Navi.css'
-import logo from '../assets/VNR_WALL.png'
+import logo from '../assets/logo2.jpeg'
 import '../styles/Navbar.css'
 import { FaHome, FaEnvelopeOpenText, FaListAlt, FaUser, FaBars } from 'react-icons/fa'
+
+
 import { useState,useEffect } from "react";
 function NavigationBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -23,11 +25,10 @@ function NavigationBar() {
       
       return () => window.removeEventListener('resize', checkScreenSize)
     }, [])
-  return (
+      return (
     <div className="navbar navbar-expand-md  p-2 ">
-      <Link className="navbar-brand" to="">
+      <Link className="navbar-brand mx-md-4 " to="">
         <img src={logo} alt="VNR Wall Logo" className="logo" />
-        VNR WALL 
       </Link>
       
       <button
@@ -64,8 +65,8 @@ function NavigationBar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="login">
-              <FaUser className="nav-icon" /> {isLoggedIn ? 'Profile' : 'Login'}
+            <Link className="nav" to="login">
+              <button className="btn btn-primary px-3 mx-2"><FaUser className="nav-icon" /> {isLoggedIn ? 'Profile' : 'Login'}</button>
             </Link>
           </li>
         </ul>
