@@ -1,4 +1,4 @@
-.menu-container {
+/* .menu-container {
   display: flex;
   align-items: center;
   margin: 0;
@@ -42,7 +42,7 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
 }
-/* Desktop Navigation Buttons */
+
 .nav-buttons.desktop {
   display: flex;
   justify-content: center;
@@ -72,7 +72,7 @@
   border-radius: 2px;
 }
 
-/* Mobile Navigation Buttons */
+
 .nav-buttons.mobile-closed {
   display: none;
 }
@@ -155,6 +155,7 @@
 
 .nav-icon {
   font-size: 1.1rem;
+  margin: 0 40px;
   transition: transform 0.3s ease;
 }
 
@@ -162,7 +163,7 @@
   transform: scale(1.2);
 }
 
-/* Responsive Adjustments */
+
 @media (min-width: 1024px) {
   .menu-toggle {
     display: none;
@@ -221,4 +222,4 @@
     padding: 8px 12px;
     font-size: 0.85rem;
   }
-}
+} */

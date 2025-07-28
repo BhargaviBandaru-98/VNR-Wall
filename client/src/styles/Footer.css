@@ -1,41 +1,27 @@
+
+
 .footer-container {
   background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  padding: 50px 20px;
+  padding: 3rem 2rem;
   border-top: 4px solid rgba(124, 58, 237, 0.3);
   border-radius: 20px;
   text-align: center;
   color: #1e293b;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-top: 60px;
   box-shadow: 
     0 10px 30px rgba(124, 58, 237, 0.15),
     0 1px 8px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  max-width: 1000px;
-  margin: 60px auto;
+  max-width: 80vw;
+  margin: 0 auto;
   position: relative;
   overflow: hidden;
 }
 
-.footer-container::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
-  animation: rotate 30s linear infinite;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .footer-heading {
   font-size: 32px;
-  margin-bottom: 30px;
+  /* margin-bottom: 1rem; */
   background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -88,15 +74,43 @@
   60% { transform: translateY(-5px); }
 }
 
-.footer-list {
-  list-style: none;
-  padding: 0;
-  max-width: 750px;
-  margin: 0 auto 25px;
-  text-align: left;
-  position: relative;
-  z-index: 1;
+
+.box{
+  max-width: 50vw;
+  min-height: 38vh ;
+  padding: 6vh 2vw;
+  text-align: center;
+  border: 2px solid #b5cbee;
+  filter: brightness(1);
+  border-left:4px solid #3b82f6;
+  margin: 1vh 1vw;
+  border-radius: 15px;
+  background: #E3E6FE;
+  transition: transform 0.2s ease-in-out;
 }
+
+/* .box:hover{
+  transform: translateY(-10px);
+  box-shadow: 2px 8px 20px rgba(59, 130, 246, 0.3);
+  background: rgba(255,255,255,0.3);
+  border:3px solid #3b82f6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+} */
+
+.box:hover{
+  transform: translateY(-10px);
+
+}
+.box strong{
+  color: #3b82f6;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 1rem;
+
+}
+
+
 
 .footer-list-item {
   margin-bottom: 16px;
@@ -114,18 +128,6 @@
   overflow: hidden;
 }
 
-.footer-list-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 15px;
-}
 
 .footer-list-item:hover {
   transform: translateX(10px) translateY(-2px);
