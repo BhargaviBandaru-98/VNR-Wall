@@ -1,388 +1,282 @@
-import React, { useEffect, useState } from "react";
-import "../styles/ViewResponsesPage.css";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { Search, Shield, CheckCircle, Clock, User, Eye, Inbox } from 'lucide-react';
+import axios from 'axios';
+import '../styles/ViewResponsesPage.css';
+import StudentMessageCard from '../components/StudentMessageCards';
 
-const ViewResponsesPage = () => {
-  const [responses, setResponses] = useState([]);
+const ViewResponses = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [messages, setMessages] = useState([]);
+  const [filteredMessages, setFilteredMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userString = localStorage.getItem('user');
-  let email = "";
 
-  // Search and filter states
-  const [categoryFilter, setCategoryFilter] = useState('All');
-  const [statusFilter, setStatusFilter] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [categories, setCategories] = useState(['All']);
-
-  if (userString !== null) {
-    const user = JSON.parse(userString); // Convert string to object
-    email = user.email;
-  }
-
-  console.log("this is mail", email);
-
+  // Fetch messages from server
   useEffect(() => {
-    async function getResponses() {
+    const fetchMessages = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:3001/api/datas");
-        // console.log(res.data);
-        setResponses(res.data);
-        
-        // Extract unique categories for the filter dropdown
-        const uniqueCategories = ['All'];
-        res.data.forEach(response => {
-          if (response.category && !uniqueCategories.includes(response.category)) {
-            uniqueCategories.push(response.category);
-          }
-        });
-        setCategories(uniqueCategories);
-        
+        const res = await axios.get('http://localhost:3001/api/datas');
+        const serverMessages = res.data.map((item, index) => ({
+          id: item.id || index + 1,
+          category: item.category || 'Not specified',
+          receivedDate: item.dateReceived || 'N/A',
+          status: item.status === 'null' ? 'inreview' : item.status ? 'fake' : 'genuine',
+          branch: item.branch || 'N/A',
+          year: item.year || 'N/A',
+          platform: item.platform || 'Unknown',
+          sender: item.name || 'Anonymous',
+          contact: item.contact || 'No Contact',
+          responseStatus: item.responded || 'No',
+          detailsShared: item.detailsShared || 'N/A',
+          credibilityRating: parseInt(item.genuineRating) || 0,
+          messageContent: item.message || '',
+          tags: item.flags ? JSON.parse(item.flags) : [],
+          submittedByUser: false
+        }));
+        setMessages(serverMessages);
+        setFilteredMessages(serverMessages);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching responses:", error);
+        console.error('Error fetching messages:', error);
         setLoading(false);
       }
-    }
-    getResponses();
+    };
+    fetchMessages();
   }, []);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    return dateString;
-  };
-
-  const getRatingColor = (rating) => {
-    if (!rating) return "gray";
-    const numRating = parseInt(rating);
-    if (numRating <= 2) return "#e53e3e"; // Red for low ratings
-    if (numRating === 3) return "#dd6b20"; // Orange for medium ratings
-    return "#38a169"; // Green for high ratings
-  };
-
-  // Get the status display for a response
-  const getStatusDisplay = (response) => {
-    if (response.status === "null") return "In Review";
-    return response.status ? "Fake" : "Genuine";
-  };
-
-  // Function to get icon color based on status
-  const getStatusIconColor = (status) => {
-    switch(status) {
-      case 'All': return '#9ca3af';
-      case 'In Review': return '#facc15';
-      case 'Genuine': return '#22c55e';
-      case 'Fake': return '#ef4444';
-      default: return '#9ca3af';
+  // Update message status
+  const updateMessageStatus = async (messageId, newStatus) => {
+    try {
+      await axios.put(`http://localhost:3001/api/update-status/${messageId}`, {
+        status: newStatus.toLowerCase() === 'fake'
+      });
+      const updatedMessages = messages.map(msg =>
+        msg.id === messageId ? { ...msg, status: newStatus.toLowerCase() } : msg
+      );
+      setMessages(updatedMessages);
+      applyFilters(updatedMessages, searchTerm, activeCategory);
+    } catch (err) {
+      console.error('Error updating status:', err);
     }
   };
 
-  // Filter the responses based on all filters
-  const filteredResponses = responses.filter(response => {
-    // Category filter
-    const categoryMatch = categoryFilter === 'All' || response.category === categoryFilter;
-    
-    // Status filter - match based on the status display that appears on cards
-    let statusMatch = false;
-    if (statusFilter === 'All') {
-      statusMatch = true;
-    } else {
-      // Match based on the status that's shown on the card
-      statusMatch = getStatusDisplay(response) === statusFilter;
+  // Apply search and category filters
+  const applyFilters = (messageList, search, category) => {
+    let filtered = messageList;
+    const searchLower = search.trim().toLowerCase();
+
+    if (searchLower) {
+      filtered = filtered.filter(msg =>
+        msg.messageContent.toLowerCase().includes(searchLower) ||
+        msg.sender.toLowerCase().includes(searchLower) ||
+        msg.platform.toLowerCase().includes(searchLower) ||
+        msg.branch.toLowerCase().includes(searchLower) ||
+        (msg.tags && msg.tags.some(tag => tag.toLowerCase().includes(searchLower)))
+      );
     }
-    
-    // Search query filter - search in multiple fields
-    const query = searchQuery.toLowerCase();
-    const searchMatch = query === '' || 
-      (response.name && response.name.toLowerCase().includes(query)) ||
-      (response.category && response.category.toLowerCase().includes(query)) ||
-      (response.platform && response.platform.toLowerCase().includes(query)) ||
-      (response.branch && response.branch.toLowerCase().includes(query)) ||
-      (response.message && response.message.toLowerCase().includes(query)) ||
-      (response.contact && response.contact.toLowerCase().includes(query));
-    
-    return categoryMatch && statusMatch && searchMatch;
-  });
+
+    if (category !== 'all') {
+      filtered =
+        category === 'submitted'
+          ? filtered.filter(msg => msg.submittedByUser)
+          : filtered.filter(msg => msg.status.toLowerCase() === category.toLowerCase());
+    }
+
+    setFilteredMessages(filtered);
+  };
+
+  useEffect(() => {
+    applyFilters(messages, searchTerm, activeCategory);
+  }, [searchTerm, activeCategory, messages]);
+
+  // Optimized getCounts (single loop)
+  const getCounts = () => {
+    const counts = { all: messages.length, fake: 0, genuine: 0, inReview: 0, submitted: 0 };
+    messages.forEach(msg => {
+      if (msg.submittedByUser) counts.submitted++;
+      switch (msg.status.toLowerCase()) {
+        case 'fake':
+          counts.fake++;
+          break;
+        case 'genuine':
+          counts.genuine++;
+          break;
+        case 'inreview':
+          counts.inReview++;
+          break;
+        default:
+          break;
+      }
+    });
+    return counts;
+  };
+
+  const counts = getCounts();
+
+  const categories = [
+    {
+      id: 'all',
+      title: 'All Messages',
+      count: counts.all,
+      icon: <Inbox className="category-icon" />,
+      color: 'orange',
+      description: 'All message types'
+    },
+    {
+      id: 'fake',
+      title: 'Fake Messages',
+      count: counts.fake,
+      icon: <Shield className="category-icon" />,
+      color: 'red',
+      description: 'Messages marked as fake or suspicious'
+    },
+    {
+      id: 'genuine',
+      title: 'Genuine Messages',
+      count: counts.genuine,
+      icon: <CheckCircle className="category-icon" />,
+      color: 'green',
+      description: 'Verified genuine messages'
+    },
+    {
+      id: 'inreview',
+      title: 'In Review Messages',
+      count: counts.inReview,
+      icon: <Clock className="category-icon" />,
+      color: 'blue',
+      description: 'Messages pending review'
+    },
+    {
+      id: 'submitted',
+      title: 'Messages Submitted by You',
+      count: counts.submitted,
+      icon: <User className="category-icon" />,
+      color: 'purple',
+      description: 'Messages you have submitted'
+    }
+  ];
 
   return (
-    <div className="responses-container">
-      <h2>Verified Responses</h2>
+    <div className="view-responses-container">
+      <div className="page-header">
+        <h1 className="page-title">View Responses</h1>
+        <p className="page-subtitle">Monitor and manage all message submissions</p>
+      </div>
 
-      {/* Filters Section */}
-      <div className="filters-container">
-        {/* Category Filter */}
-        <div className="filter-group">
-          <label htmlFor="category-filter">Category:</label>
-          <select 
-            id="category-filter" 
-            value={categoryFilter} 
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            className="filter-select"
-          >
-            {categories.map((category, index) => (
-              <option key={index} value={category}>{category}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Status Filter - Enhanced Version */}
-        <div className="filter-group">
-          <label htmlFor="status-filter">Status:</label>
-          <div className="status-filter-container">
-            <div 
-              className="status-icon" 
-              style={{ backgroundColor: getStatusIconColor(statusFilter) }}
-            ></div>
-            <select 
-              id="status-filter" 
-              value={statusFilter} 
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className={`status-filter-select ${statusFilter.toLowerCase().replace(/\s+/g, '-')}`}
-            >
-              <option value="All">All</option>
-              <option value="In Review">In Review</option>
-              <option value="Genuine">Genuine</option>
-              <option value="Fake">Fake</option>
-            </select>
-            <div className="status-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        {/* Search Filter */}
-        <div className="filter-group search-group">
+      {/* Search Bar */}
+      <div className="search-container">
+        <div className="search-wrapper">
+          <Search className="search-icon" />
           <input
             type="text"
-            placeholder="Search in cards..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search messages, senders, platforms, or tags..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
-          {searchQuery && (
-            <button 
-              className="clear-search" 
-              onClick={() => setSearchQuery('')}
-            >
+          {searchTerm && (
+            <button onClick={() => setSearchTerm('')} className="clear-search">
               ×
             </button>
           )}
         </div>
       </div>
 
-      {loading ? (
-        <div className="loading-spinner">Loading...</div>
-      ) : responses && responses.length > 0 ? (
-        <>
-          <div className="results-info">
-            Showing {filteredResponses.length} of {responses.length} responses
-          </div>
-          
-          <div className="response-cards">
-            {filteredResponses.map((response) => (
-              <div key={response.id} className="response-card">
-                <div className="card-header">
-                  <h3>{response.name || "Unknown Sender"}</h3>
-                  <div
-                    className="genuine-rating"
-                    style={{
-                      backgroundColor:
-                        response.status === "null"
-                          ? "#facc15" // Yellow for "In Review"
-                          : response.status
-                          ? "#ef4444" // Red for Fake
-                          : "#22c55e", // Green for Genuine
-                    }}
-                  >
-                    {response.status === "null"
-                      ? "In Review"
-                      : response.status
-                      ? "Fake"
-                      : "Genuine"}
-                  </div>
-                </div>
+      {/* Category Filter Tabs */}
+      <div className="filter-tabs">
+        {categories.map(category => (
+          <button
+            key={category.id}
+            className={`filter-tab ${activeCategory === category.id ? 'active' : ''} ${category.color}`}
+            onClick={() => setActiveCategory(category.id)}
+          >
+            {category.icon}
+            {category.title}
+          </button>
+        ))}
+      </div>
 
-                <div className="card-content">
-                  <div className="card-section">
-                    <p>
-                      <strong>Category:</strong>{" "}
-                      {response.category || "Not specified"}
-                    </p>
-                    <p>
-                      <strong>Platform:</strong>{" "}
-                      {response.platform || "Not specified"}
-                    </p>
-                    <p>
-                      <strong>Date Received:</strong>{" "}
-                      {formatDate(response.dateReceived)}
-                    </p>
-                    <p>
-                      <strong>Reported by:</strong> {response.name}
-                    </p>
-                    <p>
-                      <strong>Branch:</strong> {response.branch},{" "}
-                      <strong>Year:</strong> {response.year}
-                    </p>
-                    <p>
-                      <strong>Contact:</strong>{" "}
-                      {response.contact || "No contact provided"}
-                    </p>
-                  </div>
-
-                  {response.flags && (
-                    <div className="card-section">
-                      <p>
-                        <strong>Flags:</strong>
-                      </p>
-                      <div className="flags-container">
-                        {JSON.parse(response.flags).map((flag, index) => (
-                          <span key={index} className="flag-item">
-                            {flag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {response.message && (
-                    <div className="card-section message-section">
-                      <p>
-                        <strong>Message:</strong>
-                      </p>
-                      <div className="message-content">{response.message}</div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="card-footer">
-                  <p>
-                    <strong>Status:</strong> {response.responded || "No response"}
-                  </p>
-                </div>
-                <div
-                  className="genuine-rating"
-                  style={{
-                    backgroundColor: getRatingColor(response.genuineRating),
-                  }}
-                >
-                  {response.genuineRating
-                    ? `Rating: ${response.genuineRating}/5`
-                    : "No Rating"}
-                </div>
-                {
-                  (email==="24071a12d4@vnrvjiet.in" || email==="23071a1202@vnrvjiet.in" || email==="23071a1208@vnrvjiet.in" || email==="23071a04k4@vnrvjiet.in") 
-                  && <div className="verify-buttons">
-                  <button
-                    className="verify-fake" 
-                    onClick={async () => {
-                      try {
-                        await axios.put(
-                          `http://localhost:3001/api/update-status/${response.id}`,
-                          { status: true }
-                        );
-                        setResponses((prev) =>
-                        
-                          prev.map((res) =>
-                            res.id === response.id
-                              ? { ...res, status: true }
-                              : res
-                          )
-                        );
-                      } catch (err) {
-                        console.error("Error updating status to fake:", err);
-                      }
-                    }}
-                  >
-                    Mark as Fake
-                  </button>
-
-                  <button
-                    className="verify-genuine"
-                    onClick={async () => {
-                      try {
-                        await axios.put(
-                          `http://localhost:3001/api/update-status/${response.id}`,
-                          { status: false }
-                        );
-                        setResponses((prev) =>
-                          prev.map((res) =>
-                            res.id === response.id
-                              ? { ...res, status: false }
-                              : res
-                          )
-                        );
-                      } catch (err) {
-                        console.error("Error updating status to genuine:", err);
-                      }
-                    }}
-                  >
-                    Mark as Genuine
-                  </button>
-                </div>
-                }
-              </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className="placeholder-message">
-          <p>No responses available yet. Check back later!</p>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default ViewResponsesPage;
-// Status Filter Component
-const StatusFilter = ({ statusFilter, setStatusFilter }) => {
-  // Function to get icon color based on status
-  const getStatusIconColor = (status) => {
-    switch(status) {
-      case 'All': return '#9ca3af';
-      case 'In Review': return '#facc15';
-      case 'Genuine': return '#22c55e';
-      case 'Fake': return '#ef4444';
-      default: return '#9ca3af';
-    }
-  };
-
-  return (
-    <div className="filter-group">
-      <label htmlFor="status-filter">Status:</label>
-      <div className="status-filter-container">
-        <div 
-          className="status-icon" 
-          style={{ backgroundColor: getStatusIconColor(statusFilter) }}
-        ></div>
-        <select 
-          id="status-filter" 
-          value={statusFilter} 
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className={`status-filter-select ${statusFilter.toLowerCase().replace(/\s+/g, '-')}`}
+      {/* Categories Grid */}
+      {/* Categories Grid */}
+<div className="container">
+  <div className="row d-flex justify-content-center">
+    {categories.map(category => (
+      <div className="col-md-4 col-sm-6 mb-md-4 mb-sm-2" key={category.id}>
+        <div
+          className={`category-card ${category.color} ${activeCategory === category.id ? 'active' : ''}`}
+          onClick={() => setActiveCategory(category.id)}
         >
-          <option value="All">All</option>
-          <option value="In Review">In Review</option>
-          <option value="Genuine">Genuine</option>
-          <option value="Fake">Fake</option>
-        </select>
-        <div className="status-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
+          <div className="category-header">
+            <div className="category-icon-wrapper">{category.icon}</div>
+            <div className="category-info">
+              <h3 className="category-title">{category.title}</h3>
+              <p className="category-description">{category.description}</p>
+            </div>
+          </div>
+          <div className="category-count">
+            <span className="count-number">{category.count}</span>
+            <span className="count-label">Messages</span>
+          </div>
+          <div className="category-action">
+            <Eye className="view-icon" />
+            <span>View All</span>
+          </div>
         </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+      {/* Results Section */}
+      <div className="results-section">
+        <div className="results-header">
+          <h2 className="results-title">
+            {activeCategory === 'all'
+              ? `All Messages (${filteredMessages.length})`
+              : `${categories.find(c => c.id === activeCategory)?.title} (${filteredMessages.length})`}
+          </h2>
+          {searchTerm && (
+            <p className="search-results-info">
+              Showing results for "<strong>{searchTerm}</strong>"
+            </p>
+          )}
+        </div>
+
+        {loading ? (
+          <p>Loading messages...</p>
+        ) : filteredMessages.length === 0 ? (
+          <div className="no-results">
+            <div className="no-results-icon">📭</div>
+            <h3>No messages found</h3>
+            <p>
+              {searchTerm
+                ? `No messages match your search "${searchTerm}"`
+                : `No messages in this category yet`}
+            </p>
+          </div>
+        ) : (
+          <div className="messages-grid row d-flex justify-content-center">
+            {filteredMessages.map(message => (
+              <div key={message.id} className="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div className="message-card-wrapper">
+                  <StudentMessageCard data={message} onStatusUpdate={updateMessageStatus} />
+                      {message.submittedByUser && (
+                      <div className="submitted-badge">
+                          <User size={12} />
+                         <span>Your Submission</span>
+                      </div>
+                     )}
+                </div>
+              </div>
+             ))}
+          </div>
+
+        )}
       </div>
     </div>
   );
 };
 
-// Usage inside ViewResponsesPage component
-// Replace the existing status filter with this component:
-/*
-<StatusFilter 
-  statusFilter={statusFilter}
-  setStatusFilter={setStatusFilter}
-/>
-*/
+export default ViewResponses;

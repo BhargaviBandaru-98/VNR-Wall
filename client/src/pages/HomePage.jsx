@@ -2,6 +2,12 @@ import React from 'react';
 import ActionCard from '../components/ActionCard';
 import '../styles/HomePage.css';
 import Footer from '../components/Footer';
+import logo from '../assets/logo2.jpeg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFileExport } from "@fortawesome/free-solid-svg-icons";
+import { Album } from "../components/album.jsx";
+import Hero from '../components/Hero.jsx';
+
 
 const HomePage = () => {
   const user = JSON.parse(localStorage.getItem("user"))
@@ -11,8 +17,11 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-      <header className="hero">
+      <header className="hero1">
         <div className="hero-content">
+          <div className="main-logo">
+            <img src={logo} alt="VNR Wall Logo" className="subnav-logo" />
+          </div>
           <h1 id="welcomeMessage">
             <svg className="welcome-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -21,27 +30,39 @@ const HomePage = () => {
             Welcome, {fname}
           </h1>
           <p>
-            VNR WALL helps you to find Genuine opportunities. Check every opportunity you receive here – whether it's a Genuine or Fake call to you. Stop trapping into Fake Internship, Placement Training & Job Scams!
+           Verify Wall<span> - The Verify Zone</span>
           </p>
+          <p className='secondaryPara'> To find out the genuine opportunities for the Relentless seeker in you.</p>
         </div>
       </header>
 
       <section className="card-section">
+        <div className="row">
+          <div className="col-md-6 col-sm-12 pri-card "><Hero /></div>
+            
+          <div className="col-6">
         <ActionCard 
-          logo="📩"
+          logo={<FontAwesomeIcon icon={faFileExport} />}
           title="Submit a Message"
+          className= 'col-md-4 home-card'
           description="Got a suspicious internship or placement opportunity? Let us verify it for you!"
           buttonText="Go to Submit Page"
           linkTo="/submit"
         />
         <ActionCard 
-          logo="📄"
+          logo={
+            <Album width={64} height={64} className='view-responses'/>
+          }
           title="View Submissions"
+          className= 'col-md-4 home-card'
           description="Want to check the messages submitted and verified? Browse the responses."
           buttonText="View Responses"
           linkTo="/responses"
         />
+        </div>
+        </div>
       </section>
+
 
       <Footer/>
     </div>

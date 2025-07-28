@@ -170,16 +170,17 @@ const Login = () => {
               <div className="login-content">
                 <div className="login-form">
                   {/* Email Input */}
+                    <label className="label-top" >College Mail ID</label>
                   <div className="input-group">
-                    <label className="input-label">College Email ID</label>
                     <input
                       type="email"
-                      placeholder="Enter your college email"
+                      placeholder=""
                       className="email-input"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
+                    <label className="input-label">Enter your College mail ID</label>
                   </div>
 
                   {/* Login Button */}
