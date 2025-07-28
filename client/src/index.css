@@ -1,9 +1,13 @@
+@font-face {
+  font-family: satoshi;
+  src: url('./assets/Satoshi-Black.ttf');
+}
 /* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: santoshi;
   scroll-behavior: smooth;
 }
 
@@ -23,6 +27,7 @@ body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* height: 15vh; */
 }
 
 .navbar-logo {
@@ -73,7 +78,7 @@ body {
 
 /* Cards / Divs */
 .card {
-  background-color: white;
+  background-color:white;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 2rem;
@@ -83,7 +88,7 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
 }
 
 /* Footer */

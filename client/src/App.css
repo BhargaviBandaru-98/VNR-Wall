@@ -44,3 +44,31 @@ body {
     padding: 0 1rem 1rem 1rem;
   }
 }
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #7c3aed;
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #a855f7;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle-btn {
+  background: var(--primary-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
