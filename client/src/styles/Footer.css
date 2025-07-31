@@ -160,7 +160,7 @@
 
 @media (max-width:1024px) {
     .footer-container{  
-      margin: 60vh auto 10vh auto;
+      margin: 10vh auto 5vh auto;
       max-width: 100%;
     }
 
@@ -173,6 +173,14 @@
     .footer-heading{
       display: flex;
       flex-direction: column;
+    }
+
+    .card button{
+      padding: 5px 10px;
+      width: 50vw;
+      margin: 0 auto;
+      font-size: 1rem !important;
+      border-radius: 8px;
     }
 
   }

@@ -40,7 +40,7 @@ const HomePage = () => {
         <div className="row">
           <div className="col-md-6 col-sm-12 pri-card "><Hero /></div>
             
-          <div className="col-6">
+          <div className="col-sm-12 col-md-6">
         <ActionCard 
           logo={<FontAwesomeIcon icon={faFileExport} />}
           title="Submit a Message"
@@ -51,7 +51,7 @@ const HomePage = () => {
         />
         <ActionCard 
           logo={
-            <Album width={64} height={64} className='view-responses'/>
+            <Album width={48} height={48} className='view-responses'/>
           }
           title="View Submissions"
           className= 'col-md-4 home-card'
@@ -62,8 +62,6 @@ const HomePage = () => {
         </div>
         </div>
       </section>
-
-
       <Footer/>
     </div>
   );

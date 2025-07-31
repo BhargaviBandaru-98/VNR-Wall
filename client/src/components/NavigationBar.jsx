@@ -32,7 +32,7 @@ function NavigationBar() {
       </Link>
       
       <button
-        className="navbar-toggler ms-5  "
+        className="navbar-toggler ms-0  "
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"

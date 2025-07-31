@@ -126,3 +126,34 @@
   0% { transform: translateY(0px); }
   100% { transform: translateY(30px); }
 } */
+
+
+@media (max-width: 1024px) {
+
+  .hero{
+    padding: 20px 8px;
+    margin: 0 auto;
+  }
+    .hero h1{
+      font-size: 1.6rem;
+      margin-left: 0;
+    }
+
+    .hero h2{
+      font-size:1.1rem;
+      margin:  0 !important;
+    }
+
+    .hero p{
+      font-size: 0.8rem !important;
+      margin:0 0 !important;
+    }
+
+    .cta{
+      padding: 5px 20px !important;
+      font-size: 1rem;
+    }
+    
+
+    
+}
