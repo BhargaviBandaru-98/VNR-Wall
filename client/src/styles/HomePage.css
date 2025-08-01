@@ -1,7 +1,13 @@
 
+@font-face {
+  font-family: 'gilroy-bold';
+  src: url('../assets/Gilroy-Bold.ttf');
+}
+
 .homepage-container{
   margin-top: 15vh;
 }
+
 .subnav-logo{
   width: 25vw;
   height: auto;
@@ -57,7 +63,7 @@
 }
 
 .hero-content h1 {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   font-weight: bold;
   background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   -webkit-background-clip: text;
@@ -91,9 +97,22 @@
   75% { transform: rotate(10deg); }
 }
 
+
+ .hero-content .verify:not(span) {
+    font-size: clamp(1rem, 3vw, 2rem); /* Responsive font size */
+    color: #1C4CD4;
+    font-family: 'gilroy-bold', 'Arial', sans-serif;
+    letter-spacing: 2px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.0;
+    font-weight: 800;
+    padding: 0 0.3rem;
+}
+
 .hero-content p {
-  font-size: 1.5rem;
   color: #1C4CD4;
+  font-family: 'gilroy-black';
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
@@ -102,8 +121,6 @@
   font-family: 'satoshi';
 }
 
-
-
 .hero-content p span {
   font-weight: 600;
   color: #394252;
@@ -111,12 +128,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
   background-clip: text;
+  letter-spacing: 0px !important;
 }
 
-.hero-content p.secondaryPara {
-  font-size: 1.2rem;
+.hero-content .secondaryPara {
+  font-size: clamp(0.8,1.2rem,1.5rem);
   color: #4B5563;
   font-weight: 500;
+  font-family: 'gilroy-medium';
 }
 
 .card-section {

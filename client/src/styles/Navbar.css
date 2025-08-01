@@ -201,7 +201,8 @@
   .navbar-toggler{
     position: relative;
     right: -35vw;
-    margin: 1.5vh 0;
+    margin: 0.5vh 0;
+    padding: 0 auto;
     
   }
   .vnr-wall {
@@ -296,3 +297,13 @@
   li button:hover{
     background-color: #4B1EAF !important;
   }
+
+  /* Custom override to remove Bootstrap's collapsing behavior */
+.custom-collapse {
+  overflow: hidden;
+  transition: height 300ms ease;
+  display: none;
+}
+.custom-collapse.showing {
+  display: block;
+}

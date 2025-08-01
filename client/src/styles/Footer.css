@@ -160,7 +160,7 @@
 
 @media (max-width:1024px) {
     .footer-container{  
-      margin: 10vh auto 5vh auto;
+      margin: 0 auto 5vh auto;
       max-width: 100%;
     }
 
@@ -185,3 +185,25 @@
 
   }
     
+  @media (max-height: 950px) and (max-width: 400px) {
+    .footer-container{  
+      margin: 110px auto 5vh auto;
+      margin-top:180px;
+      max-width: 100%;
+    }
+
+    .footer-container h2{
+      font-size: 1.5rem !important;
+      font-family: 'satoshi-medium';
+    }
+
+  }
+
+  @media (max-height: 750px ) and (max-width: 400px) {
+    .footer-container{  
+      /* margin: 110px auto 5vh auto; */
+      margin-top:50vh;
+      max-width: 100%;
+    }
+
+  }

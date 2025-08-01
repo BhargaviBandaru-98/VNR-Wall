@@ -29,7 +29,7 @@ const HomePage = () => {
             </svg>
             Welcome, {fname}
           </h1>
-          <p>
+          <p className='verify'>
            Verify Wall<span> - The Verify Zone</span>
           </p>
           <p className='secondaryPara'> To find out the genuine opportunities for the Relentless seeker in you.</p>
