@@ -92,14 +92,14 @@
   gap: 1rem;
   font-weight: 900;
   font-family: 'gilroy';
-  color: var(--primary);
+  color: #a85cf9;
   /* filter: drop-shadow(0 4px 6px rgba(1, 1, 0, 0.9)); */
 }
 
 .navbar-brand h1{
   font-size: 2rem;
   font-family: 'gilroy';
-  color: var(--primary);
+  color: #a85cf9;
   padding-top: 1.1vh;
 }
 
@@ -128,7 +128,7 @@
   font-family: 'Segoe UI', 'Arial Black', sans-serif;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   letter-spacing: 1px;
-  color: var(--primary);
+  color: #a85cf9;
 }
 
 .verify-zone {
@@ -138,7 +138,7 @@
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   letter-spacing: 0.5px;
   margin-top: -2px;
-  color: var(--secondary);
+  color: #4B1DAF;
 }
 
 /* Responsive Adjustments */
@@ -179,6 +179,12 @@
     padding: 0.8vh 0 !important;
   }
 
+  .nav-icon{
+    margin-bottom: 0;
+  }
+
+  
+
 }
 
 @media (max-width: 768px) {
@@ -218,6 +224,10 @@
     padding: 0.8vh 0 !important;
   }
 
+  .nav-item button{
+    margin-top: 1vh ;
+  }
+
 }
 
 
@@ -238,34 +248,34 @@
 
 
 .nav-item {
-  color: var(--text);
   font-weight: bold;
 }
 
 .navbar-nav .nav-item .nav-link {
-  color: var(--accent);
+  color: #4b7be5;
   text-decoration: none !important;
   transition: color 0.3s, text-decoration 0.3s;
 }
 
 .navbar-nav .nav-item .nav-link.active {
   /* text-decoration: underline; */
-  color: var(--primary); /* Slightly lighter for active link */
+  color: #a85cf9; /* Slightly lighter for active link */
 }
 
 .navbar-nav .nav-item .nav-link:hover {
   /* text-decoration: underline; */
   font-weight: bold;
-  color: var(--secondary);
+  color:#4B1DAF;
 }
 
  .nav-link{
     position: relative;
-    color: var(--accent); /* Optional: your text color */
+    color: #4b7be5; /* Optional: your text color */
     text-decoration: none;
     font-weight: bold;
     padding: 1.3vh 0 !important;
     margin: 0 1.5vw;
+    display: inline-block;
     font-family:'gilroy-medium';
   }
   
@@ -276,7 +286,7 @@
     bottom: 0;
     width: 0;
     height: 0.4vh;
-    background: var(--secondary);
+    background: #4B1DAF;
     transition: width 0.3s ease;
   }
   
@@ -297,6 +307,8 @@
   li button:hover{
     background-color: #4B1EAF !important;
   }
+
+
 
   /* Custom override to remove Bootstrap's collapsing behavior */
 .custom-collapse {

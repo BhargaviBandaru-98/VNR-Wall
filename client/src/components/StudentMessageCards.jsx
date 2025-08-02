@@ -70,8 +70,8 @@ const StudentMessageCard = ({ data, onStatusUpdate }) => {
       </div>
 
       {/* Source and Feedback */}
-      <div className="dual-section">
-        <div className="section source-section">
+      <div className="row dual-section d-flex justify-content-around">
+        <div className="col-5 section source-section">
           <div className="section-header">
             <span className="section-title">📩 Source of Message</span>
           </div>
@@ -91,7 +91,7 @@ const StudentMessageCard = ({ data, onStatusUpdate }) => {
           </div>
         </div>
 
-        <div className="section feedback-section">
+        <div className="col-5 section feedback-section">
           <div className="section-header">
             <span className="section-title">⭐ Student Feedback</span>
           </div>

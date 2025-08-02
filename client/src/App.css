@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #f3e8ff 100%);
+  background:var(--app-background);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   color: #333;
@@ -45,17 +45,7 @@ body {
   }
 }
 
-:root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --primary-color: #7c3aed;
-}
 
-body.dark {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-  --primary-color: #a855f7;
-}
 
 body {
   background-color: var(--bg-color);

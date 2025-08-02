@@ -980,6 +980,8 @@
   
   .search-input {
     padding: 14px 45px 14px 45px;
+    height: 4vh;
+    font-size: 0.8rem !important;
   }
   
   .category-card {

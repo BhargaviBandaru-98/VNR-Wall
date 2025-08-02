@@ -1,7 +1,7 @@
 .form-container {
   max-width: 900px;
   margin: 15vh auto;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  background:  var(--form-bg);
   padding: 2.5rem;
   border-radius: 16px;
   box-shadow: 
@@ -27,7 +27,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa, #93c5fd);
+  background: var(--form-before);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
@@ -51,7 +51,7 @@
   letter-spacing: 1px;  
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  background: var(--form-header);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -394,8 +394,8 @@ textarea {
 }
 
 .submit-btn {
-  background: linear-gradient(145deg, #2563eb, #1d4ed8);
-  color: white;
+  background: var(--form-submit-btn);
+  color: var(--form-button-text);
   padding: 1.2rem 2rem;
   border: none;
   border-radius: 8px;
@@ -498,4 +498,6 @@ textarea {
     width: 40px;
     height: 40px;
   }
+
+  
 }

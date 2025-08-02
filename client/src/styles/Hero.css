@@ -14,7 +14,6 @@
   /* min-height: 100vh; */
   display: grid;
   place-items: center;
-  
   overflow: hidden;
   padding: 2rem;
 }
@@ -25,6 +24,7 @@
   max-width: 700px;
   position: relative;
   z-index: 2;
+  
 }
 
 .hero h1 {
@@ -42,7 +42,7 @@
 .hero h2 {
   font-size: 2rem;
   font-weight: bold;
-  color:#535152;
+  color:var(--hero-h2);
   min-height: 40px;
   text-align: left;
   margin-left: 3vw;

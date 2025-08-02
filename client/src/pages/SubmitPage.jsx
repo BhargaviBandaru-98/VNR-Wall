@@ -304,7 +304,7 @@ const SubmitPage = () => {
               ))}
             </div>
           </div>
-
+              
           <div className="input-group">
             <label>Have you responded to the opportunity?</label>
             <div className="radio-group">

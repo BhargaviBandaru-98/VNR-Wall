@@ -1,26 +1,150 @@
+/* theme.css */
+
+/* LIGHT THEME (default) */
 :root {
- --bg-color: #ffffff;
-  --text-color: #000000;
-  --secondary-text: #394252;
-  --primary-color: #3b82f6;
-  --secondary-color: #8b5cf6;
+  --app-background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #f3e8ff 100%);
+  --background: #ffffff;
+  --text: #000000;
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
+  --accent: #ec4899;
+
+  --nav-bg: var(--primary);
+  --nav-text: #ffffff;
+
   --card-bg: #f8fafc;
-  --card-border: rgba(59, 130, 246, 0.2);
+  --card-border: rgba(0, 0, 0, 0.1);
+
+  --button-bg: var(--primary);
+  --button-text: #ffffff;
+
+  --input-bg: #ffffff;
+  --input-text: #000000;
+
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  --animated-gradient: linear-gradient(270deg, #dbeafe, #e0e7ff, #f3e8ff, #dbeafe);
+  /* Hero section */
+  --hero-h1:linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --hero-h2:#535152;
+  --hero-bg:white;
+
+
+  /* Form light mode */
+    --form-before:linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa, #93c5fd);
+    --form-header:linear-gradient(135deg, #1e40af, #3b82f6);
+   --form-bg: #f9faff;
+  --form-input-bg: #ffffff;
+  --form-label: #1e293b;
+  --form-text: #0f172a;
+  --form-placeholder: #64748b;
+  --form-section:linear-gradient(145deg, #ffffff, #fafbff);
+  --form-section-hover:transparent;
+  --form-button: var(--primary);
+  --form-button-text: #ffffff;
+  --form-submit-btn:linear-gradient(145deg, #2563eb, #1d4ed8);
 }
 
-body.dark {
+/* DARK THEME */
+[data-theme="dark"] {
+  --app-background: linear-gradient(145deg,#0A0F1C 100%,#1E1725 0%);
+  --background: #121212;
+  --text: #f1f5f9;
+  --primary: #7dd3fc;
+  --secondary: #c084fc;
+  --accent: #fb7185;
+
+  --nav-bg: #1f2937;
+  --nav-text: #f1f5f9;
+
+  --card-bg: #1e293b;
+  --card-border: rgba(255, 255, 255, 0.1);
+
+  --button-bg: var(--secondary);
+  --button-text: #ffffff;
+
+  --input-bg: #1e1e1e;
+  --input-text: #e5e5e5;
+
+  --shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+
+  --animated-gradient: linear-gradient(270deg, #1e293b, #334155, #0f172a, #1e293b);
+  /* hero section */
+  --hero-h1:linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --hero-h2:white;
+  --hero-bg:#0A0F1C;
+  /* Form Dark Mode */
+
+   --form-before: linear-gradient(90deg, white, lightblue, black);
+  --form-header: white;
+  --form-bg: linear-gradient(145deg, #0A0F1C 100%, #1E1725 0%);
+  --form-input-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  --form-label: #f1f5f9;
+  --form-text: linear-gradient(135deg, #ffffff, #e2e8f0, #cbd5e1);
+  --form-placeholder: #94a3b8;
+  --form-section: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  --form-section-hover: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  --form-button: #7dd3fc;
+  --form-button-text: white;
+  --form-submit-btn: linear-gradient(145deg, #7dd3fc, #1d4ed8 0%, #48a7d3);
+  --form-input-border: rgba(255, 255, 255, 0.1);
+
+}
+
+/* THEME TRANSITION */
+:root, [data-theme="dark"] {
+  transition: all 0.3s ease-in-out;
+}
+
+/* BACKGROUND GRADIENT AREA (no circles) */
+.animated-gradient-bg {
+  background: var(--animated-gradient);
+  background-size: 800% 800%;
+  animation: gradientFlow 15s ease infinite;
+}
+
+/* Keyframes */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+[data-theme="dark"] {
+  /* Variable overrides */
   --bg-color: #121212;
   --text-color: #f1f5f9;
-  --secondary-text: #d1d5db;
   --primary-color: #7dd3fc;
-  --secondary-color: #c084fc;
-  --card-bg: #1f2937;
-  --card-border: rgba(125, 211, 252, 0.2);
-}
+  --card-bg: #0A0F1C;
 
-/* Apply variables */
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background 0.3s ease, color 0.3s ease;
+  /* Extra dark mode–only styles */
+  .card {
+    border: 2px solid #152648;
+    background: var(--card-bg);
+  }
+
+  .card:hover{
+    box-shadow: 0 0 12px rgba(1, 10, 88, 0.993);
+  }
+
+  .hero1{
+    background: none;
+    box-shadow: none;
+  }
+
+  .hero1::before{
+    content:none;
+  }
+  
+
+
+
+  
 }
