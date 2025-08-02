@@ -35,7 +35,11 @@
     --form-header:linear-gradient(135deg, #1e40af, #3b82f6);
    --form-bg: #f9faff;
   --form-input-bg: #ffffff;
-  --form-label: #1e293b;
+  --form-input-text:#1f2937;
+  --form-select-hover:linear-gradient(145deg, #ffffff, #fafbff);
+  --form-label: #1f2937;
+  --form-h3:#1e40af;
+  --form-h3-before:linear-gradient(135deg, #2563eb, #3b82f6);
   --form-text: #0f172a;
   --form-placeholder: #64748b;
   --form-section:linear-gradient(145deg, #ffffff, #fafbff);
@@ -43,6 +47,8 @@
   --form-button: var(--primary);
   --form-button-text: #ffffff;
   --form-submit-btn:linear-gradient(145deg, #2563eb, #1d4ed8);
+  --form-input-focus:linear-gradient(145deg, #ffffff, #fafbff);
+  --form-input-border: #e5e7eb;
 }
 
 /* DARK THEME */
@@ -79,15 +85,34 @@
   --form-header: white;
   --form-bg: linear-gradient(145deg, #0A0F1C 100%, #1E1725 0%);
   --form-input-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  --form-input-text:black;
   --form-label: #f1f5f9;
-  --form-text: linear-gradient(135deg, #ffffff, #e2e8f0, #cbd5e1);
-  --form-placeholder: #94a3b8;
+  --form-h3: linear-gradient(135deg, #ffffff, #e2e8f0, #cbd5e1);
+  --form-h3-before: linear-gradient(135deg, #ffffff, #e2e8f0, #cbd5e1);
+  --form-placeholder: white;
   --form-section: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   --form-section-hover: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
   --form-button: #7dd3fc;
   --form-button-text: white;
+  --form-text:white;
   --form-submit-btn: linear-gradient(145deg, #7dd3fc, #1d4ed8 0%, #48a7d3);
   --form-input-border: rgba(255, 255, 255, 0.1);
+  --form-input-focus:linear-gradient(#222738);
+
+
+  input[type="text"],
+input[type="email"],
+select,
+textarea{
+  box-shadow: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus{
+  box-shadow: none;
+}
 
 }
 
