@@ -80,27 +80,23 @@
   text-align: center;
    border: 2px solid var(--footer-box-border, #b5cbee);
   filter: brightness(1);
-  border-left:4px solid #3b82f6;
+  border-left:4px solid var(--footer-box-border-left, #3b82f6);
   margin: 1vh 1vw;
   border-radius: 15px;
   background: var(--footer-box-bg, #E3E6FE);
   transition: transform 0.2s ease-in-out;
 }
 
-
 .box:hover{
   transform: translateY(-10px);
-
 }
+
 .box strong{
   color: var(--footer-box-strong, #3b82f6);
   font-weight: 700;
   display: block;
   margin-bottom: 1rem;
-
 }
-
-
 
 .footer-list-item {
   margin-bottom: 16px;
@@ -113,11 +109,10 @@
     0 4px 15px var(--footer-list-shadow-1, rgba(59, 130, 246, 0.08)),
     inset 0 1px 0 var(--footer-list-inset, rgba(255, 255, 255, 0.8));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid var(--footer-list-border, #3b82f6);
   position: relative;
   overflow: hidden;
 }
-
 
 .footer-list-item:hover {
   transform: translateX(10px) translateY(-2px);

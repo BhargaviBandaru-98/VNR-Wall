@@ -108,7 +108,6 @@
   min-height: 12vh;
 }
 
-
 .category-header-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -1376,9 +1375,17 @@
     color: darkblue;
   }
 
+  [data-theme="dark"] .category-page-info h1{
+    color: #7dd3fc;
+  }
+
   .category-page-info p{
     font-size:0.7rem;
     color: darkblue;
+  }
+
+  [data-theme="dark"] .category-page-info p{
+    color: #7dd3fc;
   }
 
   .category-page-icon-wrapper {
@@ -1399,6 +1406,11 @@
     color: blue;
     font-size: 1rem;
   }
+
+  [data-theme="dark"] .category-page-count:first-child{
+    color: #7dd3fc;
+  }
+
   .category-page-label{
     font-size: 0.7rem;
   }
