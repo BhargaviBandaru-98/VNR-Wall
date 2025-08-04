@@ -6,8 +6,6 @@ import ViewResponsesPage from './pages/ViewResponsePage.jsx';
 import Login from './pages/Login';
 import './App.css';
 import NavigationBar from './components/NavigationBar';
-import Hero from "./components/Hero";
-import Footer from './components/Footer';
 import './styles/theme.css';
 
 function App() {

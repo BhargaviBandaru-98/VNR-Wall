@@ -99,7 +99,7 @@ const SubmitPage = () => {
               value={formData.branch}
               onChange={handleChange}
               required
-            >
+            >  
               <option value="">Select your branch</option>
               <option>CSE</option>
               <option>CS - AIML</option>

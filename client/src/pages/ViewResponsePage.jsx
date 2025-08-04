@@ -71,7 +71,7 @@ const CategoryPage = ({
           <div className="category-page-title">
             <button
               onClick={onBackToHome}
-              className="back-button"
+              className="back-button" 
             >
               <ArrowLeft size={20} />
             </button>
@@ -141,9 +141,12 @@ const CategoryPage = ({
                   </div>
                 )}
               </div>
+              
               </div>
               
+              
             ))}
+            
           </div>
         )}
       </div>

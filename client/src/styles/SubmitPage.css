@@ -204,6 +204,7 @@ select option {
   background: #ffffff;
   color: #1f2937;
   padding: 0.5rem;
+  font-family:'gilroy-medium';
 }
 
 .radio-group,
