@@ -104,7 +104,7 @@
   padding:1rem;
   margin-top: 8vh;
   transition: all 0.3s ease-in-out;
-  min-width: 98vw;
+  min-width: 98.5vw;
   min-height: 12vh;
 }
 
@@ -1488,7 +1488,6 @@
     min-width: 16px;
   }
   .category-page-header{
-    top:0.5vh;
    width: 100vw; 
   }
 

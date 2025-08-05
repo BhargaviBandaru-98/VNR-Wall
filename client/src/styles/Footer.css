@@ -149,6 +149,7 @@
     .footer-container{  
       margin: 0 auto 5vh auto;
       max-width: 100%;
+      margin-top: clamp(100px,5vh,300px);
     }
 
     .box{
@@ -175,7 +176,7 @@
   @media (max-height: 950px) and (max-width: 400px) {
     .footer-container{  
       margin: 110px auto 5vh auto;
-      margin-top:180px;
+      margin-top:200px;
       max-width: 100%;
     }
 

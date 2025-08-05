@@ -91,10 +91,24 @@
   transition: rotate 0.3s ease;
 }
 
+[data-theme="dark"] .welcome-icon{
+  background:var(--footer-logo-bg, linear-gradient(135deg, #3b82f6, #8b5cf6));
+  filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
+  border: none;
+  filter: drop-shadow(0 2px 4px var(--footer-logo-drop-shadow, rgba(59, 130, 246, 0.3)));
+  color: var(--footer-shield-color, white);
+  box-shadow: 0 8px 20px var(--footer-logo-shadow, rgba(59, 130, 246, 0.3));
+  margin-right: 10px;
+
+}
+
+
 .welcome-icon:hover{
   rotate: 360deg;
   
 }
+
+
 
 @keyframes wave {
   0%, 100% { transform: rotate(0deg); }
