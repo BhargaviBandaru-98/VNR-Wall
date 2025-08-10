@@ -827,6 +827,7 @@
   position: relative;
   overflow: hidden;
   color: var(--view-responses-card-text);
+  min-height: 38vh;
 }
 
 .category-card::before {
@@ -1408,6 +1409,24 @@
 
 }
 
+
+@media (max-width: 786px) {
+  .category-page-header {
+    padding: 1vh;
+    position: fixed;
+    top: 2vh;
+  }
+
+  .category-page-container{
+    width: 100vw;
+  }
+
+  .no-results-container {
+    margin: 20vh auto;
+  }
+
+}
+
 @media (max-width: 480px) {
   .page-title {
     font-size: 1.75rem;
@@ -1436,6 +1455,9 @@
     padding: 16px;
   }
   
+  .no-results-container{
+    margin: 20vh auto;
+  }
   .nav-title {
     font-size: 9px;
     line-height: 1.1;
@@ -1484,5 +1506,9 @@
 
   .category-messages-grid{
     margin-top:20vh;
+  }
+
+  .category-card{
+    min-height: 1vh;
   }
 }

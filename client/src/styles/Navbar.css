@@ -168,6 +168,14 @@
     margin: 0 0.5rem;
     padding: 0.8vh 0 !important;
   }
+  
+  .nav{
+    margin-top: 1vh;
+  }
+  
+  
+
+  
 
 }
 
@@ -286,9 +294,7 @@
 li button:hover{
   background-color: var(--nav-button-hover, #4B1EAF) !important;
 }
-  li button:hover{
-    background-color: #4B1EAF !important;
-  }
+
 
 /* Custom override to remove Bootstrap's collapsing behavior */
 .custom-collapse {
