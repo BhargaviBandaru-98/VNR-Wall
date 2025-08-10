@@ -185,7 +185,7 @@ const ViewResponses = () => {
           branch: item.branch || 'N/A',
           year: item.year || 'N/A',
           platform: item.platform || 'Unknown',
-          sender: item.name || 'Anonymous',
+          sender: item.sender || 'Anonymous',
           contact: item.contact || 'No Contact',
           responseStatus: item.responded || 'No',
           detailsShared: item.detailsShared || 'N/A',

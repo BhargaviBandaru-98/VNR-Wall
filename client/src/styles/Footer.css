@@ -173,7 +173,7 @@
 
   }
     
-  @media (max-height: 950px) and (max-width: 400px) {
+  @media (max-height: 950px) and (max-width: 450px) {
     .footer-container{  
       margin: 110px auto 5vh auto;
       margin-top:200px;
@@ -187,7 +187,7 @@
 
   }
 
-  @media (max-height: 750px ) and (max-width: 400px) {
+  @media (max-height: 750px ) and (max-width: 450px) {
     .footer-container{  
       /* margin: 110px auto 5vh auto; */
       margin-top:50vh;

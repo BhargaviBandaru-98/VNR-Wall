@@ -85,7 +85,7 @@
 
 .navbar-brand .logo {
   height: auto;
-  width:clamp(170px,15vw,400px);
+  width:clamp(150px,15vw,400px);
   object-fit: contain;
   border-radius: 10px;
   /* box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
@@ -104,7 +104,6 @@
   .navbar-brand .logo{
     position: absolute;
     left: 5%;
-    width: 30vw !important;
     height: auto;
   }
 

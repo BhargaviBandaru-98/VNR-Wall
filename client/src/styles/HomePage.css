@@ -301,6 +301,12 @@
   .card-section {
     padding: 0 0.5rem 0.5rem 0.5rem;
   }
+
+  .subnav-logo{
+    width: 50vw;
+    height: auto;
+    margin: 2vh 0;
+  }
 }
 
 
