@@ -93,11 +93,11 @@ const StudentMessageCard = ({ data, onStatusUpdate }) => {
 
         <div className="col-5 section feedback-section">
           <div className="section-header">
-            <span className="section-title">⭐ Student Feedback</span>
+            <span className="section-title ">⭐ Student Response</span>
           </div>
           <div className="feedback-details">
             <div className="detail-row">
-              <span className="label">Response Status:</span>
+              <span className="label">Responded Status:</span>
               <span className={`response-status ${
                 data.responseStatus === 'Yes' ? 'status-yes' : 
                 data.responseStatus === 'No' ? 'status-no' : 'status-considering'
@@ -107,7 +107,7 @@ const StudentMessageCard = ({ data, onStatusUpdate }) => {
             </div>
             <div className="detail-row">
               <span className="label">Details Shared:</span> 
-              <span className="details-shared">{data.detailsShared}</span>
+              <span className="details-shared">{data.personalDetails}</span>
             </div>
             <div className="detail-row">
               <span className="label">Credibility:</span>

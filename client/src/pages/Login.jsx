@@ -4,7 +4,6 @@ import "../styles/Login.css";
 const Login = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
 
   useEffect(() => {
     const hash = window.location.hash.substring(1);
@@ -19,7 +18,6 @@ const Login = () => {
       })
         .then((res) => res.json())
         .then((u) => {
-          localStorage.setItem("user", JSON.stringify(u));
           setUser(u);
           setIsLoading(false);
           window.history.replaceState({}, document.title, "/profile");
@@ -28,18 +26,10 @@ const Login = () => {
           console.error("Failed to fetch user info:", err);
           setIsLoading(false);
         });
-    } else {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) setUser(JSON.parse(storedUser));
     }
   }, []);
 
   const handleLogin = () => {
-    if (!email.trim()) {
-      alert('Please enter your college email ID');
-      return;
-    }
-    
     setIsLoading(true);
     const clientId =
       "454432176985-mau86u28qd49dd3n2hfeh7mpi75qlse5.apps.googleusercontent.com";
@@ -48,12 +38,11 @@ const Login = () => {
       "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${encodeURIComponent(
       scope
-    )}&include_granted_scopes=true&state=login&login_hint=${encodeURIComponent(email)}`;
+    )}&include_granted_scopes=true&state=login`;
     window.location.href = url;
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
     setUser(null);
   };
 
@@ -169,20 +158,6 @@ const Login = () => {
               
               <div className="login-content">
                 <div className="login-form">
-                  {/* Email Input */}
-                    <label className="label-top" >College Mail ID</label>
-                  <div className="input-group">
-                    <input
-                      type="email"
-                      placeholder=""
-                      className="email-input"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                    <label className="input-label">Enter your College mail ID</label>
-                  </div>
-
                   {/* Login Button */}
                   <button
                     onClick={handleLogin}
@@ -195,7 +170,7 @@ const Login = () => {
                         Logging in...
                       </div>
                     ) : (
-                      'Login with Google'
+                      'Login with College Mail ID to Access'
                     )}
                   </button>
                 </div>

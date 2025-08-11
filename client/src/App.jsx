@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { SunMedium, MoonStar } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import SubmitPage from './pages/SubmitPage';
 import ViewResponsesPage from './pages/ViewResponsePage.jsx';
@@ -9,7 +10,9 @@ import NavigationBar from './components/NavigationBar';
 import './styles/theme.css';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
+  const themeBtnRef = useRef(null);
+  const themeIconRef = useRef(null);
 
   // Load saved or system theme
   useEffect(() => {
@@ -26,7 +29,21 @@ function App() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    setTheme(prev => {
+      const newTheme = prev === 'light' ? 'dark' : 'light';
+      if (themeBtnRef.current && themeIconRef.current) {
+        if (newTheme === 'light') {
+          themeBtnRef.current.style.backgroundColor = 'lightgrey';
+          themeIconRef.current.style.left = '-50%';
+          themeIconRef.current.style.transition = 'all 0.3s ease';
+        } else {
+          themeBtnRef.current.style.backgroundColor = '#D7AEFB';
+          themeIconRef.current.style.left = '50%';
+          themeIconRef.current.style.transition = 'all 0.3s ease';
+        }
+      }
+      return newTheme;
+    });
   };
 
   return (
@@ -44,11 +61,18 @@ function App() {
 
         {/* Toggle Theme Button */}
         <div style={{ textAlign: 'right', padding: '0.5rem 1rem' }}>
-          <button onClick={toggleTheme} className="theme-toggle-btn">
-            {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+          <button ref={themeBtnRef} onClick={toggleTheme} className="theme-toggle-btn">
+            <div
+              ref={themeIconRef}
+              className="theme-icon"
+              style={{ position: 'relative' }}
+            >
+              {theme === 'light'
+                ? <SunMedium size={24} />
+                : <MoonStar size={24} />}
+            </div>
           </button>
         </div>
-
       </div>
     </Router>
   );

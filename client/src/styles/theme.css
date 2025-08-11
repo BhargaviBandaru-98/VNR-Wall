@@ -117,6 +117,19 @@
   --student-card-date-text: #6b7280;
   --student-card-expand-bg: rgba(107, 114, 128, 0.1);
   --student-card-expand-text: #6b7280;
+
+  /* Login Light Mode */
+  --login-container-bg: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #f3e8ff 100%);
+  --login-card-bg: rgba(255, 255, 255, 0.8);
+  --login-text-primary: #1f2937;
+  --login-text-secondary: #6b7280;
+  --login-app-title: linear-gradient(135deg, #2563eb, #8b5cf6);
+  --login-logo-bg: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --login-button-bg: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --login-button-hover: linear-gradient(135deg, #2563eb, #7c3aed);
+  --login-security-bg: linear-gradient(135deg, #dbeafe, #f3e8ff);
+  --login-security-border: #bfdbfe;
+  --login-shield-color: white;
   
 
   .logo{
@@ -240,6 +253,19 @@
   --student-card-expand-bg: rgba(255, 255, 255, 0.08);
   --student-card-expand-text: #cbd5e1;
 
+  /* Login Dark Mode */
+  --login-container-bg: linear-gradient(145deg, #0A0F1C 0%, #1E1725 50%, #0f0a19 100%);
+  --login-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  --login-text-primary: #f1f5f9;
+  --login-text-secondary: #cbd5e1;
+  --login-app-title: linear-gradient(135deg, #7dd3fc, #c084fc);
+  --login-logo-bg: linear-gradient(135deg, #7dd3fc, #c084fc);
+  --login-button-bg: linear-gradient(135deg, #7dd3fc, #c084fc);
+  --login-button-hover: linear-gradient(135deg, #0ea5e9, #a855f7);
+  --login-security-bg: linear-gradient(135deg, rgba(125, 211, 252, 0.08), rgba(192, 132, 252, 0.08));
+  --login-security-border: rgba(125, 211, 252, 0.2);
+  --login-shield-color: #0A0F1C;
+
   input[type="text"],
 input[type="email"],
 select,
@@ -254,9 +280,9 @@ textarea:focus{
   box-shadow: none;
 }
 
-.logo,.subnav-logo{
+/* .logo,.subnav-logo{
   content: url('../assets/logo.night.png');
-}
+} */
 
 }
 
