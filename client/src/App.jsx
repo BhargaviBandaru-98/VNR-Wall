@@ -10,37 +10,49 @@ import NavigationBar from './components/NavigationBar';
 import './styles/theme.css';
 
 function App() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('dark'); // 'light' or 'dark'
   const themeBtnRef = useRef(null);
   const themeIconRef = useRef(null);
 
-  // Load saved or system theme
+  // Detect initial theme from localStorage or system preference
   useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const current = saved || (prefersDark ? 'dark' : 'light');
-    setTheme(current);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'dark' : 'light');
+    }
   }, []);
 
-  // Apply theme via [data-theme] and store
+  // Listen for system theme changes if no manual override
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = e => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  // Apply theme & save it whenever it changes
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  // Toggle theme on button click
   const toggleTheme = () => {
     setTheme(prev => {
       const newTheme = prev === 'light' ? 'dark' : 'light';
       if (themeBtnRef.current && themeIconRef.current) {
-        if (newTheme === 'light') {
-          themeBtnRef.current.style.backgroundColor = 'lightgrey';
-          themeIconRef.current.style.left = '-50%';
-          themeIconRef.current.style.transition = 'all 0.3s ease';
-        } else {
-          themeBtnRef.current.style.backgroundColor = '#D7AEFB';
-          themeIconRef.current.style.left = '50%';
-          themeIconRef.current.style.transition = 'all 0.3s ease';
-        }
+        themeBtnRef.current.style.backgroundColor =
+          newTheme === 'light' ? 'lightgrey' : '#D7AEFB';
+        themeIconRef.current.style.transform =
+          newTheme === 'light' ? 'translateX(-100%)' : 'translateX(0%)';
+        themeIconRef.current.style.transition = 'all 0.3s ease';
       }
       return newTheme;
     });
@@ -49,8 +61,15 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <NavigationBar />
+        {/* Navigation bar with mobile theme toggle */}
+        <NavigationBar
+          theme={theme}
+          toggleTheme={toggleTheme}
+          themeBtnRef={themeBtnRef}
+          themeIconRef={themeIconRef}
+        />
 
+        {/* Routes */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/submit" element={<SubmitPage />} />
@@ -59,9 +78,14 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
-        {/* Toggle Theme Button */}
-        <div style={{ textAlign: 'right', padding: '0.5rem 1rem' }}>
-          <button ref={themeBtnRef} onClick={toggleTheme} className="theme-toggle-btn">
+        {/* Desktop-only Theme Toggle */}
+        <div className="desktop-only" style={{ textAlign: 'right', padding: '0.5rem 1rem' }}>
+          <button
+            ref={themeBtnRef}
+            onClick={toggleTheme}
+            className="theme-toggle-btn"
+            aria-label="Toggle Theme"
+          >
             <div
               ref={themeIconRef}
               className="theme-icon"
