@@ -10,18 +10,28 @@ import NavigationBar from './components/NavigationBar';
 import './styles/theme.css';
 
 function App() {
-  const [theme, setTheme] = useState('dark'); // 'light' or 'dark'
+  const [theme, setTheme] = useState('light'); // 'light' or 'dark'
   const themeBtnRef = useRef(null);
   const themeIconRef = useRef(null);
 
   // Detect initial theme from localStorage or system preference
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
+    let initialTheme;
     if (savedTheme) {
-      setTheme(savedTheme);
+      initialTheme = savedTheme;
     } else {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
+      initialTheme = prefersDark ? 'dark' : 'light';
+    }
+    setTheme(initialTheme);
+
+    // Apply visual state to button immediately
+    if (themeBtnRef.current && themeIconRef.current) {
+      themeBtnRef.current.style.backgroundColor =
+        initialTheme === 'light' ? 'lightgrey' : '#D7AEFB';
+      themeIconRef.current.style.transform =
+        initialTheme === 'light' ? 'translateX(0%)' : 'translateX(100%)';
     }
   }, []);
 
@@ -30,7 +40,8 @@ function App() {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = e => {
       if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
+        const sysTheme = e.matches ? 'dark' : 'light';
+        setTheme(sysTheme);
       }
     };
     mediaQuery.addEventListener('change', handleChange);
@@ -51,7 +62,7 @@ function App() {
         themeBtnRef.current.style.backgroundColor =
           newTheme === 'light' ? 'lightgrey' : '#D7AEFB';
         themeIconRef.current.style.transform =
-          newTheme === 'light' ? 'translateX(-100%)' : 'translateX(0%)';
+          newTheme === 'light' ? 'translateX(0%)' : 'translateX(100%)';
         themeIconRef.current.style.transition = 'all 0.3s ease';
       }
       return newTheme;
@@ -79,7 +90,7 @@ function App() {
         </Routes>
 
         {/* Desktop-only Theme Toggle */}
-        <div className="desktop-only" style={{ textAlign: 'right', padding: '0.5rem 1rem' }}>
+        <div className="desktop-only" >
           <button
             ref={themeBtnRef}
             onClick={toggleTheme}
@@ -89,7 +100,6 @@ function App() {
             <div
               ref={themeIconRef}
               className="theme-icon"
-              style={{ position: 'relative' }}
             >
               {theme === 'light'
                 ? <SunMedium size={24} />

@@ -54,7 +54,6 @@ body {
 }
 
 .theme-toggle-btn {
-  background: var(--primary-color,grey);
   color: var(black,--text-color);
   border:2px solid var(--nav-text);
   padding: 0.5rem 1rem;
@@ -69,7 +68,7 @@ body {
   font-size: 1rem;
   border-radius: 30px;
   border: none;
-  background-color: #D7AEFB;
+  
   
 }
 
@@ -81,11 +80,15 @@ body {
     background-color:white;
     /* box-shadow: 0 0 10px black; */
     position: relative;
-    right: -50%;
+    left: -50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+[data-theme="dark"] .theme-icon {
+  position: relative;
+  right: -50%;
 }
 
 /* @media (max-width: 1024px) {
